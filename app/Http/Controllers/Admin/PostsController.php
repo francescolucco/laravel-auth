@@ -108,11 +108,10 @@ class PostsController extends Controller
 
         $data = $request->all();
 
-        $data['slug'] = Post::generateSlug($data['title']);
-
-        // if($data['slug'] !== $post->slug){
-
-        // };
+        
+        if($data['title'] !== $post->title){
+            $data['slug'] = Post::generateSlug($data['title']);
+        }
 
         $post->update($data);
 
