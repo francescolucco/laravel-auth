@@ -5,6 +5,12 @@
     <div class="row justify-content-center">
          <h1>Elenco POST</h1>
 
+         @if (session('deleted'))
+            <div class="col-12 alert alert-danger" role="alert">
+              {{session('deleted')}}
+            </div>
+         @endif
+
          <table class="table">
             <thead>
               <tr>
@@ -26,7 +32,11 @@
                   <a href="{{route('admin.posts.edit', $post)}}" type="button" class="btn btn-success">Edit</a>
                  </td>
                  <td>
-                  <a href="" type="button" class="btn btn-danger">Edit</a>
+                   <form action="{{route('admin.posts.destroy', $post)}}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                      <button type="submit" value="cancella" class="btn btn-danger">Edit</button>
+                  </form>
                  </td>
                </tr>
                @endforeach
